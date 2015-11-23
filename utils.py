@@ -27,6 +27,8 @@ def when(query):
 	pass
 def where(query):
 	pass
+def why(query):
+    pass
 
 def getResult(query):
 	if "when" in query:
@@ -37,5 +39,7 @@ def getResult(query):
 		return what(query)
 	if "where" in query:
 		return where(query)
+    if "why" in query:
+        return why(query)
 	else:
 		return "Sorry, can you rephrase your query as a Who, What, Where, or When question?"
