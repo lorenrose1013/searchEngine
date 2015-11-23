@@ -16,3 +16,26 @@ def getURLSoup(url):
 if __name__ == "__main__": 
 	urls =  getTenURLS("who played spiderman")
 	print getURLSoup(urls[0]).prettify()
+
+
+
+def who(query):
+	pass
+def what(query):
+	pass
+def when(query):
+	pass
+def where(query):
+	pass
+
+def getResult(query):
+	if "when" in query:
+		return when(query)
+	if "who" in query:
+		return who(query)
+	if "what" in query:
+		return what(query)
+	if "where" in query:
+		return where(query)
+	else:
+		return "Sorry, can you rephrase your query as a Who, What, Where, or When question?"
