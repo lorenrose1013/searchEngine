@@ -13,7 +13,12 @@ def getURLSoup(url):
 	soup = bs4.BeautifulSoup(page, 'html')
 	return soup
 
-
+def getTenSoup(query):
+        urls = getTenURLS(query)
+        soups = []
+        for url in urls:
+                soups.append(getURLSoup(url)
+        return soups
 
 if __name__ == "__main__": 
 	urls =  getTenURLS("who played spiderman")
@@ -22,7 +27,8 @@ if __name__ == "__main__":
 
 
 def who(query):
-	pass
+        soups = getTenSoup(query)
+        #parse for who
 def when(query):
 	pass
 def where(query):
