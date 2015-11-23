@@ -35,11 +35,11 @@ def getResult(query):
 		return when(query)
 	elif "who" in query:
 		return who(query)
-	elif "what" in query:
-		return what(query)
+	##elif "what" in query:
+	##	return what(query)
 	elif "where" in query:
 		return where(query)
-    elif "why" in query:
-        return why(query)
+    ##elif "why" in query:
+    ##    return why(query)
 	else:
 		return "Sorry, can you rephrase your query as a Who, What, Where, or When question?"
