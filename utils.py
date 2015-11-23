@@ -13,6 +13,8 @@ def getURLSoup(url):
 	soup = bs4.BeautifulSoup(page, 'html')
 	return soup
 
+
+
 if __name__ == "__main__": 
 	urls =  getTenURLS("who played spiderman")
 	print getURLSoup(urls[0]).prettify()
@@ -21,25 +23,17 @@ if __name__ == "__main__":
 
 def who(query):
 	pass
-def what(query):
-	pass
 def when(query):
 	pass
 def where(query):
 	pass
-def why(query):
-    pass
 
 def getResult(query):
 	if "when" in query:
 		return when(query)
-	if "who" in query:
+	elif "who" in query:
 		return who(query)
-	if "what" in query:
-		return what(query)
-	if "where" in query:
+	elif "where" in query:
 		return where(query)
-    if "why" in query:
-        return why(query)
 	else:
-		return "Sorry, can you rephrase your query as a Who, What, Where, or When question?"
+		return "Sorry, can you rephrase your query as a Who, Where, or When question?"
