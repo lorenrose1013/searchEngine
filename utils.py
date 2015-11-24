@@ -37,10 +37,17 @@ def getTenSoup(query):
         return soups
 
 
+
 if __name__ == "__main__": 
 	#urls =  getTenURLS("who played spiderman")
 	#print getURLSoup(urls[0]).prettify()
     print who("who played spiderman")
+
+
+if __name__ == "__main__": 
+	urls =  getTenURLS("who played spiderman")
+	print getURLSoup(urls[0]).prettify()
+    
 
 def who(query):
         pages = getTenPages(query)
@@ -58,7 +65,11 @@ def who(query):
         #parse for who
         
 def when(query):
-    soups = getTenSoup(query)
+    pages = getTenPages(query)
+    finds = {}
+    dateSub1 = "[0-9]/[0-9]/[0-9]"
+    ## for page in pages:
+    ##    results = re.sub("","",page)
 
 def where(query):
     soups = getTenSoup(query)
