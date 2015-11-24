@@ -25,17 +25,19 @@ if __name__ == "__main__":
 	print getURLSoup(urls[0]).prettify()
 
 
-
+    
 def who(query):
-        soups = getTenSoup(query)
-        #parse for who
+    soups = getTenSoup(query)
+    #parse for who
+
 def when(query):
-	pass
+    soups = getTenSoup(query)
+
 def where(query):
-	pass
+    soups = getTenSoup(query)
 
 def getResult(query):
-	if "when" in query:
+    if "when" in query:
 		return when(query)
 	elif "who" in query:
 		return who(query)
