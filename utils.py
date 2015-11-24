@@ -20,13 +20,37 @@ def getTenPages(query):
 #        soups = []
 #        for url in urls:
 #                soups.append(getURLSoup(url)
-#        return soups
+#        return soup
+	
+
+def getURLSoup(url):
+	page = urllib2.urlopen(url)
+	page = page.read()
+	soup = bs4.BeautifulSoup(page, 'html')
+	return soup
+
+def getTenSoup(query):
+        urls = getTenURLS(query)
+        soups = []
+        for url in urls:
+            soups.append(getURLSoup(url)
+        return soups
+>>>>>>> 77d7e33b6516eadfeae99882f650dc37c46390dc
 
 if __name__ == "__main__": 
 	urls =  getTenURLS("who played spiderman")
 	print getURLSoup(urls[0]).prettify()
 
 
+<<<<<<< HEAD
+=======
+    
+def who(query):
+    soups = getTenSoup(query)
+    names = {}
+    
+    #parse for who
+>>>>>>> 77d7e33b6516eadfeae99882f650dc37c46390dc
 
 def who(query):
         pages = getTenPages(query)
@@ -46,14 +70,14 @@ def where(query):
 
 def getResult(query):
     if "when" in query:
-		return when(query)
+        return when(query)
 	elif "who" in query:
 		return who(query)
-	elif "where" in query:
+    elif "where" in query:
 		return where(query)
 	##elif "what" in query:
 	##	return what(query)
-        ##elif "why" in query:
-        ##    return why(query)
+    ##elif "why" in query:
+    ##    return why(query)
 	else:
 		return "Sorry, can you rephrase your query as a Who, Where, or When question?"
