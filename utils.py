@@ -4,10 +4,10 @@ def getTenPages(query):
 	results = google.search(query, num=10, start = 0, stop = 10)
 	pages = []
 	for url in results:
-        page = urllib2.urlopen(url)
-        page = page.read()
-		pages.append(page)
-    return pages
+            page = urllib2.urlopen(url)
+            page = page.read()
+            pages.append(page)
+        return pages
 
 #def getURLSoup(url):
 #	page = urllib2.urlopen(url)
@@ -35,22 +35,12 @@ def getTenSoup(query):
         for url in urls:
             soups.append(getURLSoup(url)
         return soups
->>>>>>> 77d7e33b6516eadfeae99882f650dc37c46390dc
+
 
 if __name__ == "__main__": 
-	urls =  getTenURLS("who played spiderman")
-	print getURLSoup(urls[0]).prettify()
-
-
-<<<<<<< HEAD
-=======
-    
-def who(query):
-    soups = getTenSoup(query)
-    names = {}
-    
-    #parse for who
->>>>>>> 77d7e33b6516eadfeae99882f650dc37c46390dc
+	#urls =  getTenURLS("who played spiderman")
+	#print getURLSoup(urls[0]).prettify()
+    print who("who played spiderman")
 
 def who(query):
         pages = getTenPages(query)
@@ -59,7 +49,12 @@ def who(query):
         for page in pages:        
                 results = re.sub("", "", page)
                 for r in results:
-                        finds[r] = find
+                        if r in finds:
+                            finds[r] += 1
+                        else:
+                            finds[r] = 1
+        ##bucket style
+        print finds
         #parse for who
         
 def when(query):
