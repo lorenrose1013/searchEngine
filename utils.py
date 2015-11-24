@@ -28,18 +28,24 @@ if __name__ == "__main__":
 
 
 
-
 def who(query):
         pages = getTenPages(query)
-        
+        finds ={}
+        nameSub1 = "[A-Z][a-z]? [A-Z][a-z]?"
+        for page in pages:        
+                results = re.sub("", "", page)
+                for r in results:
+                        finds[r] = find
         #parse for who
+        
 def when(query):
-	pass
+    soups = getTenSoup(query)
+
 def where(query):
-	pass
+    soups = getTenSoup(query)
 
 def getResult(query):
-	if "when" in query:
+    if "when" in query:
 		return when(query)
 	elif "who" in query:
 		return who(query)
