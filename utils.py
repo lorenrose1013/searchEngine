@@ -1,24 +1,26 @@
 import google, urllib2, bs4, re
 
-def getTenURLS(query):
+def getTenPages(query):
 	results = google.search(query, num=10, start = 0, stop = 10)
-	urls = []
-	for page in results:
-		urls.append(page)
-	return urls
+	pages = []
+	for url in results:
+        page = urllib2.urlopen(url)
+        page = page.read()
+		pages.append(page)
+    return pages
 
-def getURLSoup(url):
-	page = urllib2.urlopen(url)
-	page = page.read()
-	soup = bs4.BeautifulSoup(page, 'html')
-	return soup
+#def getURLSoup(url):
+#	page = urllib2.urlopen(url)
+#	page = page.read()
+#	soup = bs4.BeautifulSoup(page, 'html')
+#	return soup
 
-def getTenSoup(query):
-        urls = getTenURLS(query)
-        soups = []
-        for url in urls:
-                soups.append(getURLSoup(url)
-        return soups
+#def getTenPages(query):
+#        urls = getTenURLS(query)
+#        soups = []
+#        for url in urls:
+#                soups.append(getURLSoup(url)
+#        return soups
 
 if __name__ == "__main__": 
 	urls =  getTenURLS("who played spiderman")
@@ -26,8 +28,10 @@ if __name__ == "__main__":
 
 
 
+
 def who(query):
-        soups = getTenSoup(query)
+        pages = getTenPages(query)
+        
         #parse for who
 def when(query):
 	pass
