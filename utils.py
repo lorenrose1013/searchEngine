@@ -17,7 +17,7 @@ def getTenSoup(query):
         urls = getTenURLS(query)
         soups = []
         for url in urls:
-                soups.append(getURLSoup(url)
+            soups.append(getURLSoup(url)
         return soups
 
 if __name__ == "__main__": 
@@ -28,6 +28,8 @@ if __name__ == "__main__":
     
 def who(query):
     soups = getTenSoup(query)
+    names = {}
+    
     #parse for who
 
 def when(query):
@@ -38,14 +40,14 @@ def where(query):
 
 def getResult(query):
     if "when" in query:
-		return when(query)
+        return when(query)
 	elif "who" in query:
 		return who(query)
-	elif "where" in query:
+    elif "where" in query:
 		return where(query)
 	##elif "what" in query:
 	##	return what(query)
-        ##elif "why" in query:
-        ##    return why(query)
+    ##elif "why" in query:
+    ##    return why(query)
 	else:
 		return "Sorry, can you rephrase your query as a Who, Where, or When question?"
