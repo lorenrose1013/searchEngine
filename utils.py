@@ -1,14 +1,38 @@
 import google, urllib2, bs4, re
 
+def removeStopWords(text):
+	f = open("stop_words.txt", "r")
+	stopWords = f.read()
+	stopWords.replace("\r", "")
+	stopWords.split("\n")
+	#print stopWords
+	f.close()
+	text = text.split(" ")
+	fixedText = []
+	for i in text:
+		if i.lower() not in stopWords:
+			fixedText.append(i)
+	fixedText = " ".join(fixedText) 
+	return fixedText
+
 def getTenPages(query):
 	results = google.search(query, num=10, start = 0, stop = 10)
 	pages = []
 	for url in results:
-		url = urllib2.Request(url, headers={'User-Agent' : "Bot? What Bot?"})
-		responce = urllib2.urlopen(url)
-		page = responce.read()
+		newUrl = urllib2.Request(url, headers={'User-Agent' : "Bot? What Bot?"}) #to get to <some> sites that try to avoid bots
+		try:
+			# some websites try to avoid being spammed by bots
+			# they cause errors which would halt the program
+			# catch those errors and return blank page instead
+			responce = urllib2.urlopen(newUrl)
+			page = responce.read()
+		except:
+			print "url %s was not valid" % url
+			page = ""
+		page = removeStopWords(page)
 		pages.append(page)
 	return pages
+
 
 def who(query):
 	pages = getTenPages(query)
@@ -21,7 +45,10 @@ def who(query):
 				finds[r] += 1
 			else:
 					finds[r] = 1
-	print max(finds, key=finds.get)
+	print query
+	result = max(finds, key=finds.get)
+	print result
+	return result
 
 def when(query):
     pages = getTenPages(query)
@@ -51,6 +78,10 @@ def getResult(query):
 
 
 if __name__ == "__main__": 
-	#urls =  getTenURLS("who played spiderman")
-	#print getURLSoup(urls[0]).prettify()
-    print who("Who did 9/11?")
+    who("Who will be the next President ?") # returns Donald Trump (uh-oh)
+    who("Who is best korea?") #returns North Korea
+    who("Who wrote the song Hello?") #returns lionel richie, the origial
+    who("Who killed Kennedy?") #returns the warren commission LOL
+    who("Who played spiderman?") #returns peter parker. duh 
+    who("Who was the first president of the united states ") #returns john hanson first prez under articles of confederations
+    
