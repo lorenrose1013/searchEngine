@@ -1,6 +1,7 @@
 import google, urllib2, re
 
 def removeStopWords(text):
+	""" Removes common english words from a block of text so they don't skew results"""
 	f = open("stop_words.txt", "r")
 	stopWords = f.read()
 	stopWords.replace("\r", "")
@@ -16,6 +17,13 @@ def removeStopWords(text):
 	return fixedText
 
 def getTenPages(query):
+	"""Return list of ten web pages that result from the given query
+
+		param: 
+			query: string to get pages for from google api 
+		return:
+			list of ten elements, which are each strings of webpages with stop words removed
+	"""
 	results = google.search(query, num=10, start = 0, stop = 10)
 	pages = []
 	for url in results:
@@ -33,34 +41,43 @@ def getTenPages(query):
 		pages.append(page)
 	return pages
 
+#no longer nessecary just use the getAnswer with appropriate regex list
 
-def who(query):
-	pages = getTenPages(query)
-	finds ={}
-	nameSub = "[A-Z][a-z]+ [A-Z][a-z]+"
-	for page in pages:        
-		results = re.findall(nameSub, page)
-		for r in results:
-			if r in finds:
-				finds[r] += 1
-			else:
-					finds[r] = 1
-	print query
-	result = max(finds, key=finds.get)
-	print result
-	return result
+# def who(query):
+# 	pages = getTenPages(query)
+# 	finds ={}
+# 	nameSub = "[A-Z][a-z]+ [A-Z][a-z]+"
+# 	for page in pages:        
+# 		results = re.findall(nameSub, page)
+# 		for r in results:
+# 			if r in finds:
+# 				finds[r] += 1
+# 			else:
+# 					finds[r] = 1
+# 	print query
+# 	result = max(finds, key=finds.get)
+# 	print result
+# 	return result
 
-def when(query):
-    pages = getTenPages(query)
-    finds = {}
-    dateSub1 = "[0-9]/[0-9]/[0-9]"
-    ## for page in pages:
-    ##    results = re.sub("","",page)
+# def when(query):
+#     pages = getTenPages(query)
+#     finds = {}
+#     dateSub1 = "[0-9]/[0-9]/[0-9]"
+#     ## for page in pages:
+#     ##    results = re.sub("","",page)
 
-def where(query):
-    pages = getTenPages(query)
+# def where(query):
+#     pages = getTenPages(query)
 
 def getAnswer(query, regexList):
+	"""Get most common result of regex in the first ten pages of the given query
+
+		parms:
+			query: string to be searched
+			regexList: List of regular expressions to search the webpages for 
+		return:
+			Most common result of searching ten web pages for given regular expressions
+	"""
 	pages = getTenPages(query)
 	finds ={}
 	for regex in regexList:
@@ -78,17 +95,23 @@ def getAnswer(query, regexList):
 	return result
 
 def getResult(query):
+	"""Answer a who, when, or where query 
+
+		params:
+			query: string of question to answer 
+		return:
+			string of responce [or string of error if invalid query]
+	"""
 	if "when" in query.lower():
-		return when(query)
+		#return when(query)
+		dateRegex = ["[0-9]/[0-9]/[0-9]"] #add more date regex's here 
+		return getAnswer(query, dateRegex)
 	elif "who" in query.lower():
 		nameRegex = ["[A-Z][a-z]+ [A-Z][a-z]+"]
 		return getAnswer(query, nameRegex)
 	elif "where" in query.lower():
-		return where(query)
-	##elif "what" in query:
-	##	return what(query)
-    ##elif "why" in query:
-    ##    return why(query)
+		whereRegex = []
+		return getAnswer(query, whereRegex)
 	else:
 		return "Sorry, can you rephrase your query as a Who, Where, or When question?"
 
