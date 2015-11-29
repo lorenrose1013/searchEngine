@@ -1,4 +1,4 @@
-import google, urllib2, bs4, re
+import google, urllib2, re
 
 def removeStopWords(text):
 	f = open("stop_words.txt", "r")
@@ -37,9 +37,9 @@ def getTenPages(query):
 def who(query):
 	pages = getTenPages(query)
 	finds ={}
-	nameSub1 = "[A-Z][a-z]+ [A-Z][a-z]+"
+	nameSub = "[A-Z][a-z]+ [A-Z][a-z]+"
 	for page in pages:        
-		results = re.findall(nameSub1, page)
+		results = re.findall(nameSub, page)
 		for r in results:
 			if r in finds:
 				finds[r] += 1
@@ -60,11 +60,29 @@ def when(query):
 def where(query):
     pages = getTenPages(query)
 
+def getAnswer(query, regexList):
+	pages = getTenPages(query)
+	finds ={}
+	for regex in regexList:
+		for page in pages:        
+			results = re.findall(regex, page)
+			for r in results:
+				if r in finds:
+					finds[r] += 1
+				else:
+						finds[r] = 1
+	
+	result = max(finds, key=finds.get)
+	# print query
+	# print result
+	return result
+
 def getResult(query):
 	if "when" in query.lower():
 		return when(query)
 	elif "who" in query.lower():
-		return who(query)
+		nameRegex = ["[A-Z][a-z]+ [A-Z][a-z]+"]
+		return getAnswer(query, nameRegex)
 	elif "where" in query.lower():
 		return where(query)
 	##elif "what" in query:
