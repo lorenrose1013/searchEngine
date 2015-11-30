@@ -183,7 +183,13 @@ def getResult(query):
 		nameRegex = ["[A-Z][a-z]+ [A-Z][a-z]+"]
 		return getAnswer(query, nameRegex)
 	elif "where" in query.lower():
-		whereRegex = []
+		whereRegex = ["[0-9]+ - [0-9]+ [0-9]+ Street [A-Z][a-z]+ (?:[A-Z][a-z]+)?, [A-Z][a-z]+ (?:[A-Z][a-z]+)? [0-9]{5}",
+                            "[0-9]+ - [0-9]+ [0-9]+ Avenue [A-Z][a-z]+ (?:[A-Z][a-z]+)?, [A-Z][a-z]+ (?:[A-Z][a-z]+)? [0-9]{5}",
+                            "[0-9]+ - [0-9]+ [0-9]+ Place [A-Z][a-z]+ (?:[A-Z][a-z]+)?, [A-Z][a-z]+ (?:[A-Z][a-z]+)? [0-9]{5}",
+                            "[0-9]+ - [0-9]+ [0-9]+ Boulevard [A-Z][a-z]+ (?:[A-Z][a-z]+)?, [A-Z][a-z]+ (?:[A-Z][a-z]+)? [0-9]{5}",
+                            "[0-9]+ - [0-9]+ [0-9]+ Drive [A-Z][a-z]+ (?:[A-Z][a-z]+)?, [A-Z][a-z]+ (?:[A-Z][a-z]+)? [0-9]{5}",
+                            "[0-9]+ - [0-9]+ [0-9]+ Lane [A-Z][a-z]+ (?:[A-Z][a-z]+)?, [A-Z][a-z]+ (?:[A-Z][a-z]+)? [0-9]{5}",
+                            "[A-Z][a-z]+ (?:[A-Z][a-z]+)?, [A-Z][a-z]+ (?:[A-Z][a-z]+)? [0-9]{5}"]
 		return getAnswer(query, whereRegex)
 	else:
 		return "Sorry, can you rephrase your query as a Who, Where, or When question?"
