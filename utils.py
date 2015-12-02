@@ -88,7 +88,8 @@ def getAnswer(query, regexList):
 					finds[r] += 1
 				else:
 						finds[r] = 1
-	
+	if ( len(finds) == 0):
+		return "Sorry, no results found"
 	result = max(finds, key=finds.get)
 	# print query
 	# print result
